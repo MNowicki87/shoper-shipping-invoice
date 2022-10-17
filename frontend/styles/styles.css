@@ -1,0 +1,42 @@
+a[highlight] {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.header {
+    padding: 0 var(--lumo-space-m);
+}
+
+.header h1.logo {
+    font-size: 1em;
+    margin: var(--lumo-space-m);
+}
+
+.list-view .orders-content {
+    display: flex;
+}
+
+.list-view .order-grid {
+    flex: 2;
+}
+
+.list-view .single-order {
+    flex: 1;
+    padding: var(--lumo-space-m);
+}
+
+.list-view .single-order .buttons {
+    flex-basis: 100%;
+}
+
+@media all and (max-width: 1100px) {
+    .list-view.viewing .toolbar,
+    .list-view.viewing .order-grid {
+        display: none;
+    }
+}
+
+.dashboard-view .stats {
+    font-size: 4em;
+    margin: 1em 0;
+}

@@ -224,3 +224,5 @@ webpack.generated.js
 .mvn/**
 mvnw
 mvnw.cmd
+/.jpb/
+/Dockerfile

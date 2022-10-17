@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+   <meta charset="UTF-8"/>
+   <title>Faktura</title>
+   <!--  page settings    -->
+   <style>
+       @font-face {
+           font-family: Roboto;
+           src: url("/static/fonts/Roboto.ttf") format('truetype');
+           -fs-pdf-font-embed: embed;
+           -fs-pdf-font-encoding: Identity-H;
+       }
+
+       @page {
+           size: A4;
+           margin-left: 10mm;
+           margin-right: 15mm;
+       }
+
+       *,
+       html,
+       body {
+           font-family: Roboto, sans-serif;
+           margin: 0;
+           -webkit-print-color-adjust: exact;
+       }
+
+       body {
+           background: #fff !important;
+           color: #000000;
+       }
+
+       h1,
+       h2 {
+           font-size: 14pt;
+           text-transform: uppercase;
+           margin: 15pt 0 15pt;
+       }
+
+       h3 {
+           font-size: 12pt;
+           margin: 15pt 0 5pt;
+       }
+
+       a {
+           page-break-inside: avoid
+       }
+
+       blockquote {
+           page-break-inside: avoid;
+       }
+
+       h1,
+       h2,
+       h3,
+       h4,
+       h5,
+       h6 {
+           page-break-after: avoid;
+           page-break-inside: avoid;
+       }
+
+       img {
+           page-break-inside: avoid;
+           page-break-after: avoid;
+       }
+
+       table,
+       pre {
+           page-break-inside: avoid
+       }
+
+       ul,
+       ol,
+       dl {
+           page-break-before: avoid
+       }
+
+       a:link,
+       a:visited,
+       a {
+           background: transparent;
+           color: #520;
+           font-weight: bold;
+           text-decoration: underline;
+           text-align: left;
+       }
+
+       a {
+           page-break-inside: avoid
+       }
+
+       a:after > img {
+           content: "";
+       }
+
+       article a[href^="#"]:after {
+           content: "";
+       }
+
+       @media screen {
+           * {
+               box-sizing: border-box;
+           }
+
+           html {
+               background-color: #aaa;
+           }
+
+           body {
+               background-color: #fff;
+               width: 210mm;
+               height: 297mm;
+               margin: auto;
+               padding: 15mm 10mm;
+           }
+       }
+   </style>
+   <!--  layout settings  -->
+   <style>
+       .t-center {
+           text-align: center;
+       }
+
+       .strike {
+           text-decoration-line: line-through;
+       }
+
+       .t-right {
+           text-align: right;
+       }
+
+       .t-left {
+           text-align: left;
+       }
+
+       .issue-date {
+           font-size: 8pt;
+       }
+
+       #buyer-seller {
+           overflow: hidden;
+       }
+
+       #buyer-seller > div {
+           float: left;
+           width: 49%;
+           font-size: 9pt;
+           line-height: 10pt;
+       }
+
+       #buyer-seller > div > h2 {
+           margin-bottom: 5pt;
+       }
+
+       #header {
+           overflow: hidden;
+       }
+
+       #header > div {
+           float: right;
+           width: 49%;
+           height: 25mm;
+       }
+
+       table {
+           border: 1pt solid #aaa;
+           font-size: 9pt;
+           width: 100%;
+           border-collapse: collapse;
+           margin-top: 5pt;
+       }
+
+       td {
+           text-align: right;
+       }
+
+       table > thead th {
+           text-align: right;
+           word-wrap: normal;
+       }
+
+       table tr {
+           border: 1pt solid #aaa;
+       }
+
+       table tbody tr:nth-child(2n-1) {
+           background-color: #ddd !important;
+       }
+
+       .signatures {
+           margin-top: 10pt;
+           overflow: hidden;
+       }
+
+       .signatures > div {
+           float: left;
+           width: 49%;
+           text-align: center;
+           font-size: 8pt;
+       }
+
+       .signature {
+           font-weight: bold;
+           font-size: 10pt;
+       }
+
+       .watermark {
+           transform: rotate(-45deg) translate(-50%, -50%);
+           display: block;
+           z-index: 999;
+           position: absolute;
+           font-size: 240px;
+           color: rgba(0, 0, 0, .5);
+           top: 50%;
+           left: 50%;
+       }
+   </style>
+</head>
+
+<body>
+
+   <p class="issue-date">Wystawiono dnia <span th:text="${invoice.getIssueDate()}">00-00-0000</span>, Gdańsk</p>
+   <div id="header">
+      <div>
+         <h3>NIE <span class="strike">Faktura VAT</span> nr FZ <span
+               th:text="${invoice.getInvoiceNumber()}">xxxx / xxxx</span></h3>
+         <table>
+            <tr>
+               <td>Data otrzymania zaliczki:</td>
+               <td th:text="${invoice.getIssueDate()}">00-00-0000</td>
+            </tr>
+            <tr>
+               <td>Sposób zapłaty:</td>
+               <td th:text="${invoice.getPaymentType()}">Przelew</td>
+            </tr>
+         </table>
+      </div>
+   </div>
+   <div id="buyer-seller">
+      <div>
+         <h3>Sprzedawca:</h3>
+         <p th:text="#{company.name}">Firma</p>
+         <p th:text="#{company.street}">ul. Uuuuu 11</p>
+         <p th:text="#{company.postcode} + ' ' + #{company.city}">00-000 Miasto</p>
+         <p th:text="'NIP: ' + #{company.NIP}">NIP: 0000000000</p>
+         <p th:text="'tel.: ' + #{company.phone}">tel. +48 000 000 000</p>
+         <p th:text="#{company.website}">www.dn.tld</p>
+         <p th:text="#{company.email}">email@dn.tld</p>
+      </div>
+      <div>
+         <h3>Nabywca:</h3>
+         <p th:if="${invoice.getCompany() != null}" th:text="${invoice.getCompany()}">Nazwa firmy</p>
+         <p th:if="${invoice.getCompany().isBlank()}" th:text="${invoice.getName()}">Imię i nazwisko</p>
+         <p th:text="${invoice.getAddress()}">ul. Uuuuuuu 12</p>
+         <p th:text="${invoice.getPostCode()} + ' ' + ${invoice.getCity()}">00-000 Miasto</p>
+         <p th:unless="${invoice.getNip().isEmpty()}" th:text="'NIP: ' + ${invoice.getNip()}">NIP: 0000000000</p>
+      </div>
+   </div>
+
+   <h2>POZYCJE (nie)FAKTURY</h2>
+   <table>
+      <thead>
+      <tr>
+         <th>L.p.</th>
+         <th class="t-left">Nazwa towaru lub usługi</th>
+         <th>Ilość</th>
+         <th>Jedn.</th>
+         <th>Cena jedn. brutto</th>
+         <th>Wartość brutto</th>
+         <th>Stawka VAT</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+         <td class="t-center">1</td>
+         <td class="t-left"><span th:text="#{invoice.service}">Dostawa VIP</span> (zam. <span
+               th:text="${invoice.getOrderNumShort()}">188/FS/2020</span>)
+         </td>
+         <td>1</td>
+         <td>usł.</td>
+         <td th:text="${invoice.getGrossAmount()}">1 350,00</td>
+         <td th:text="${invoice.getGrossAmount()}">1 350,00</td>
+         <td>23%</td>
+      </tr>
+      </tbody>
+   </table>
+
+   <h2>PODSUMOWANIE</h2>
+
+   <table>
+      <thead>
+      <tr>
+         <th></th>
+         <th>Stawka VAT</th>
+         <th>Wartość netto</th>
+         <th>VAT</th>
+         <th>Wartość brutto</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+         <td></td>
+         <td class="t-center">23%</td>
+         <td th:text="${invoice.getNetAmount()}">1 097,56</td>
+         <td th:text="${invoice.getVatAmount()}">252,44</td>
+         <td th:text="${invoice.getGrossAmount()}">1 350,00</td>
+      </tr>
+      <tr style="font-weight: bold;">
+         <td>Razem:</td>
+         <td></td>
+         <td th:text="${invoice.getNetAmount()}">1 097,56,00</td>
+         <td th:text="${invoice.getVatAmount()}">252,44</td>
+         <td th:text="${invoice.getGrossAmount()}">1 350,00</td>
+      </tr>
+      <tr>
+         <td>Zapłacono:</td>
+         <td></td>
+         <td></td>
+         <td colspan="3" th:text="${invoice.getGrossAmount()}">1 350,00</td>
+      </tr>
+      <tr style="font-weight: bold;">
+         <td>Słownie:</td>
+         <td></td>
+         <td></td>
+         <td colspan="3" th:text="${invoice.getGrossInWords()}">jeden tysiąc trzysta pięćdziesiąt PLN</td>
+      </tr>
+      <tr>
+         <td>Konto bankowe:</td>
+         <td></td>
+         <td></td>
+         <td colspan="3" th:text="#{company.bank.pln}">BANK 11 1111 1001 0000 1111 1111 1111</td>
+      </tr>
+      <tr>
+         <td>Uwagi:</td>
+         <td></td>
+         <td></td>
+         <td colspan="3" th:text="#{invoice.title.advancePayment(${invoice.getOrderNumShort()})}">Zaliczka 100% do zam.
+            nr 188 na michalnowicki.eu
+         </td>
+      </tr>
+      </tbody>
+   </table>
+
+   <h2>DANE ZAMÓWIENIA</h2>
+   <table>
+      <thead>
+      <tr>
+         <th>L.p.</th>
+         <th class="t-left">Nazwa towaru lub usługi</th>
+         <th>Ilość</th>
+         <th>Jedn.</th>
+         <th>Cena jedn. brutto</th>
+         <th>Wartość brutto</th>
+         <th>Stawka VAT</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+         <td class="t-center">1</td>
+
+         <td class="t-left"><span th:text="#{invoice.service}">Dostawa VIP</span> (zam. <span
+               th:text="${invoice.getOrderNumShort()}">188/FS/2020</span>)
+         </td>
+         <td>1</td>
+         <td>usł.</td>
+         <td th:text="${invoice.getGrossAmount()}">1 350,00</td>
+         <td th:text="${invoice.getGrossAmount()}">1 350,00</td>
+         <td>23%</td>
+      </tr>
+      </tbody>
+   </table>
+
+   <h2>PODSUMOWANIE ZAMÓWIENIA</h2>
+   <table>
+      <thead>
+      <tr>
+         <th></th>
+         <th>Stawka VAT</th>
+         <th>Wartość netto</th>
+         <th>VAT</th>
+         <th>Wartość brutto</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+         <td></td>
+         <td>23%</td>
+         <td th:text="${invoice.getNetAmount()}">1 097,56</td>
+         <td th:text="${invoice.getVatAmount()}">252,44</td>
+         <td th:text="${invoice.getGrossAmount()}">1 350,00</td>
+      </tr>
+      <tr style="font-weight: bold;">
+         <td>Razem:</td>
+         <td></td>
+         <td th:text="${invoice.getNetAmount()}">1 097,56</td>
+         <td th:text="${invoice.getVatAmount()}">252,44</td>
+         <td th:text="${invoice.getGrossAmount()}">1 350,00</td>
+      </tr>
+      </tbody>
+   </table>
+
+   <div class="signatures">
+      <div>
+         <p>(nie)Faktura bez podpisu odbiorcy</p>
+      </div>
+      <div>
+         <p>Osoba upoważniona do wystawienia (nie)faktury</p>
+         <p class="signature" th:text="#{invoice.signature}">John Doe</p>
+      </div>
+      <p></p>
+   </div>
+
+</body>
+</html>
