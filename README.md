@@ -1,0 +1,57 @@
+Shoper Shipping Invoice Demo
+============================
+
+![project-image](https://socialify.git.ci/MNowicki87/shoper-shipping-invoice/image?font=Inter&language=1&name=1&owner=1&pattern=Signal&theme=Light)
+
+Application started as an educational project, soon to realize that I need it for as an internal tool to issue invoices. It communicates with a Shoper (e-commerce SaaS) via REST API to fetch data about orders, ordered products, clients etc. It allows to import bank statement of incoming transfers as csv and bind said payments to customer orders manually or with a consecutive import of a csv file from payment-processing service provider (BlueMedia). Having information about orders and payments together it can issue an invoice, which can be then be downloaded as individual PDFs or in bulk - zipped.
+
+At the beginning of project I've made quite an unfortunate call and decided to use [vaadin](https://vaadin.com/), which at the time, seemed like a perfect tool to easily build frontend. That being said I'm aware of several flaws in the architecture, which I plan to successfully Although since the application is used only as an internal tool and by me alone - I convinced myself that working is better than perfect.
+
+![shields](https://img.shields.io/badge/SpringBoot-2.3.1-green)
+![shields](https://img.shields.io/badge/Java-11-lightblue) 
+![shields](https://img.shields.io/badge/Vaadin-14.8.3-blue) 
+![shields](https://img.shields.io/badge/H2-in--memory-orange)
+![shields](https://img.shields.io/badge/css-3-navy)
+
+🚀 Demo
+-------
+
+Coming soon…
+
+Project Screenshots:
+--------------------
+
+![project-screenshot](asdf)
+
+🧐 Features
+-----------
+
+Here're some of the project's features:
+* Display basic sales statistics
+* Import payment details from bank statements
+* Import payment details from payment processing platform (BlueMedia)
+* Issue invoices for delivery services based on processed payments and orders data
+* Send issued invoices by e-mail
+* Communicate with Shoper SaaS via REST API
+* Listen for webhooks about new orders from Shoper Saas
+
+🛠️ Installation Steps:
+-----------------------
+
+1. asdf
+
+```aasdf```
+
+2. asdf
+
+```asdf```
+
+💻 Built with
+-------------
+
+Technologies used in the project:
+* Java 11
+* Spring Boot 2.3.1
+* Vaadin 14.8.3
+* Liquibase
+* Docker
