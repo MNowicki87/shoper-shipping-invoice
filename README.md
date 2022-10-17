@@ -1,7 +1,7 @@
 Shoper Shipping Invoice Demo
 ============================
 
-![project-image](https://socialify.git.ci/MNowicki87/shoper-shipping-invoice?description=1&font=Rokkitt&logo=https%3A%2F%2Favatars.githubusercontent.com%2Fu%2F55910255&name=1&owner=1&pattern=Signal&theme=Light)
+![shoper-shipping-invoice](https://socialify.git.ci/MNowicki87/shoper-shipping-invoice/image?description=1&font=Rokkitt&language=1&name=1&owner=1&pattern=Signal&theme=Light)
 
 Application started as an educational project, soon to realize that I need it for as an internal tool to issue invoices.
 It communicates with a Shoper (e-commerce SaaS) via REST API to fetch data about orders, ordered products, clients etc.
@@ -30,7 +30,7 @@ Coming soon…
 Project Screenshots:
 --------------------
 
-![project-screenshot](asdf)
+Coming soon…
 
 🧐 Features
 -----------
