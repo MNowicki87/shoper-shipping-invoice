@@ -7,8 +7,7 @@ Application started as an educational project, soon to realize that I need it fo
 It communicates with a Shoper (e-commerce SaaS) via REST API to fetch data about orders, ordered products, clients etc.
 It allows to import bank statement of incoming transfers as csv and bind said payments to customer orders manually or
 with a consecutive import of a csv file from payment-processing service provider (BlueMedia). Having information about
-orders and payments together it can issue an invoice, which can be then be downloaded as individual PDFs or in bulk (
-zipped).
+orders and payments together it can issue an invoice, which can be then be downloaded as individual PDFs or in bulk (zipped).
 
 At the beginning of this project I've made quite an unfortunate call and decided to use [vaadin](https://vaadin.com/),
 which at the time, seemed like a perfect tool to easily build frontend. That being said I'm aware of several flaws in
