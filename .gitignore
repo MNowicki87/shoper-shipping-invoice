@@ -4,7 +4,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-*.properties
+*.secret
 
 ### STS ###
 .apt_generated
@@ -218,7 +218,6 @@ webpack.config.js
 webpack.generated.js
 
 *.db
-/src/main/resources/database/
 /src/main/resources/static/images/znak-poziom.png
 
 .mvn/**

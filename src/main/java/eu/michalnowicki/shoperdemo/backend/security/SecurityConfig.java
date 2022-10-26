@@ -45,7 +45,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
             .requestMatchers(SecurityUtils::isFrameworkInternalRequest).permitAll()
             .antMatchers("/api/orders").permitAll()
-            .antMatchers("/db-console/**").permitAll()
             .anyRequest().authenticated()
             
             .and().formLogin()
