@@ -131,13 +131,13 @@ public class ShoperFacade {
                   .readerForListOf(OrderDto.class)
                   .readValue(mapper.readTree(json)
                         .path("list"));
+            log.info("Got " + temp.size() + " orders from page " + page);
             
             page = mapper.readTree(json).path("page").asInt() + 1;
             pages = mapper.readTree(json).path("pages").asInt();
             ordersList.addAll(temp);
-            log.info("Got " + temp.size() + " orders from page " + page);
          } catch (IOException e) {
-            throw new RuntimeException(e);
+            log.warning(e.getMessage());
          }
          
       } while (page <= pages);

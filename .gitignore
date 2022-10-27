@@ -4,8 +4,6 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-*.properties
-
 ### STS ###
 .apt_generated
 .classpath
@@ -218,8 +216,7 @@ webpack.config.js
 webpack.generated.js
 
 *.db
-/src/main/resources/database/
-/src/main/resources/static/images/znak-poziom.png
+/src/main/resources/META-INF
 
 .mvn/**
 mvnw
